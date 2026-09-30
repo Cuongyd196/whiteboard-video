@@ -14,6 +14,10 @@ Phù hợp cho: video kể chuyện ngắn, bài giảng, giải thích kiến t
 
 Ảnh nét gốc: [cảnh trao ô](examples/cho-di-nhan-lai-scene-01.png) · [cảnh nhận lại](examples/cho-di-nhan-lai-scene-02.png).
 
+**Dự án: Vì sao điện thoại càng dùng càng chậm?** — video giải thích kiến thức làm từ chủ đề: hai cảnh vẽ lần lượt ba nguyên nhân (bộ nhớ đầy, ứng dụng nặng, pin chai) và cách khắc phục, có giọng đọc và phụ đề tiếng Việt.
+
+🎬 [Xem video hoàn chỉnh trên Facebook Reel](https://www.facebook.com/reel/1645434740472048)
+
 ## Nó làm được gì
 
 - Viết kịch bản từ một chủ đề và dừng để bạn duyệt.
