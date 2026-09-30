@@ -1,0 +1,191 @@
+{
+  "sceneId": "scene-01-trao-o",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "sceneDurationMs": 18682,
+  "storyBasis": "Nam trao chiếc ô duy nhất cho cậu bé ôm sách rồi chạy vào mưa, không chờ nhận lại.",
+  "elements": [
+    {
+      "id": "rain",
+      "label": "Mái hiên và mưa",
+      "sequence": 1,
+      "narrativeRole": "Đặt bối cảnh chiều mưa",
+      "subtitle": "Cho đi rồi, liệu có nhận lại không?",
+      "region": {
+        "x": 0,
+        "y": 0,
+        "width": 1672,
+        "height": 941
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 126,
+        "durationMs": 1893,
+        "maskPaddingPx": 0,
+        "protectedRegions": [
+          {
+            "x": 180,
+            "y": 405,
+            "width": 285,
+            "height": 465
+          },
+          {
+            "x": 195,
+            "y": 200,
+            "width": 365,
+            "height": 205
+          },
+          {
+            "x": 400,
+            "y": 200,
+            "width": 450,
+            "height": 670
+          },
+          {
+            "x": 1080,
+            "y": 165,
+            "width": 550,
+            "height": 720
+          }
+        ]
+      },
+      "handPath": {
+        "start": [
+          836,
+          0
+        ],
+        "end": [
+          836,
+          940
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "boy",
+      "label": "Cậu bé ôm sách",
+      "sequence": 2,
+      "narrativeRole": "Người đang cần giúp đỡ",
+      "subtitle": "Chiều ấy, Nam thấy một cậu bé ôm chồng sách đứng trú mưa.",
+      "region": {
+        "x": 180,
+        "y": 405,
+        "width": 285,
+        "height": 465
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 2103,
+        "durationMs": 3279,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          322,
+          405
+        ],
+        "end": [
+          322,
+          869
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "umbrella",
+      "label": "Chiếc ô xanh",
+      "sequence": 3,
+      "narrativeRole": "Món quà được trao đi",
+      "subtitle": "Anh đưa cậu chiếc ô duy nhất của mình.",
+      "region": {
+        "x": 195,
+        "y": 200,
+        "width": 365,
+        "height": 205
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 5519,
+        "durationMs": 1560,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          377,
+          200
+        ],
+        "end": [
+          377,
+          404
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "nam",
+      "label": "Nam trao ô",
+      "sequence": 4,
+      "narrativeRole": "Hành động giúp đỡ và lời nói ân cần",
+      "subtitle": "“Cầm lấy nhé. Sách ướt thì tiếc lắm.”",
+      "region": {
+        "x": 400,
+        "y": 200,
+        "width": 450,
+        "height": 670
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7161,
+        "durationMs": 3257,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          625,
+          200
+        ],
+        "end": [
+          625,
+          869
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "leaving",
+      "label": "Nam chạy dưới mưa",
+      "sequence": 5,
+      "narrativeRole": "Cho đi mà không chờ đền đáp",
+      "subtitle": "Cậu bé hỏi cách trả ô. Nam chỉ cười, rồi chạy vào màn mưa. Chiếc ô không trở lại. Nam cũng dần quên chuyện ấy.",
+      "region": {
+        "x": 1080,
+        "y": 165,
+        "width": 550,
+        "height": 720
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 10537,
+        "durationMs": 7645,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1355,
+          165
+        ],
+        "end": [
+          1355,
+          884
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

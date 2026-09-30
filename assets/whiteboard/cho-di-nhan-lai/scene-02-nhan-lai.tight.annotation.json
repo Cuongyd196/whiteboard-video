@@ -1,0 +1,191 @@
+{
+  "sceneId": "scene-02-nhan-lai",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "sceneDurationMs": 19885,
+  "storyBasis": "Nam được người thợ xa lạ giúp sửa xe, nhớ chiếc ô và nhận ra ý nghĩa tiếp nối sự tử tế.",
+  "elements": [
+    {
+      "id": "road",
+      "label": "Đường vắng",
+      "sequence": 1,
+      "narrativeRole": "Đặt bối cảnh lần gặp sau",
+      "subtitle": "Vài tuần sau, xe anh hỏng giữa đường vắng.",
+      "region": {
+        "x": 0,
+        "y": 0,
+        "width": 1672,
+        "height": 941
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 110,
+        "durationMs": 273,
+        "maskPaddingPx": 0,
+        "protectedRegions": [
+          {
+            "x": 130,
+            "y": 180,
+            "width": 760,
+            "height": 690
+          },
+          {
+            "x": 695,
+            "y": 400,
+            "width": 290,
+            "height": 445
+          },
+          {
+            "x": 425,
+            "y": 25,
+            "width": 495,
+            "height": 310
+          },
+          {
+            "x": 1110,
+            "y": 465,
+            "width": 525,
+            "height": 310
+          }
+        ]
+      },
+      "handPath": {
+        "start": [
+          836,
+          0
+        ],
+        "end": [
+          836,
+          940
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "breakdown",
+      "label": "Nam và xe hỏng",
+      "sequence": 2,
+      "narrativeRole": "Nam trở thành người cần giúp đỡ",
+      "subtitle": "Vài tuần sau, xe anh hỏng giữa đường vắng.",
+      "region": {
+        "x": 130,
+        "y": 180,
+        "width": 760,
+        "height": 690
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 383,
+        "durationMs": 2245,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          510,
+          180
+        ],
+        "end": [
+          510,
+          869
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "mechanic",
+      "label": "Bác thợ giúp sửa xe",
+      "sequence": 3,
+      "narrativeRole": "Sự giúp đỡ đến từ một người xa lạ",
+      "subtitle": "Một bác thợ dừng lại, cúi xuống nối giúp sợi dây bị đứt. Nam ngỏ ý trả công. Bác xua tay: “Trước cũng có người giúp tôi.”",
+      "region": {
+        "x": 695,
+        "y": 400,
+        "width": 290,
+        "height": 445
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 2738,
+        "durationMs": 7437,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          840,
+          400
+        ],
+        "end": [
+          840,
+          844
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "memory",
+      "label": "Nhớ chiếc ô",
+      "sequence": 4,
+      "narrativeRole": "Liên hệ với lần cho đi trước đó",
+      "subtitle": "Nghe vậy, anh chợt nhớ chiếc ô hôm ấy.",
+      "region": {
+        "x": 425,
+        "y": 25,
+        "width": 495,
+        "height": 310
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 10355,
+        "durationMs": 2905,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          672,
+          25
+        ],
+        "end": [
+          672,
+          334
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "kindness",
+      "label": "Tiếp nối sự tử tế",
+      "sequence": 5,
+      "narrativeRole": "Kết lại thông điệp cho đi không đòi đáp lại",
+      "subtitle": "Cho đi không phải một lời hẹn sẽ được trả lại. Nhưng mỗi lần giúp nhau, ta làm cuộc đời bớt lạnh đi một chút.",
+      "region": {
+        "x": 1110,
+        "y": 465,
+        "width": 525,
+        "height": 310
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13381,
+        "durationMs": 6004,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1372,
+          465
+        ],
+        "end": [
+          1372,
+          774
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}
