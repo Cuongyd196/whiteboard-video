@@ -15,5 +15,7 @@ venv/
 Thumbs.db
 .DS_Store
 
-# Local project assets (not committed)
-assets/whiteboard/dien-thoai-cham/
+# Local video projects (not committed); keep one sample project
+assets/whiteboard/*
+!assets/whiteboard/cho-di-nhan-lai/
+assets/whiteboard/**/tts-cache/
