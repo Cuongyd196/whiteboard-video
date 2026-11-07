@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video vẽ tay bảng trắng"
+  short_description: "Biến chủ đề, kịch bản hoặc phụ đề SRT thành video vẽ tay có giọng đọc và phụ đề"
+  default_prompt: "Dùng $whiteboard-video làm video vẽ tay hoàn chỉnh từ nội dung này."

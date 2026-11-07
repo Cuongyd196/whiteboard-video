@@ -4,7 +4,7 @@ Biến **một chủ đề, một kịch bản hoặc file phụ đề `.srt`** 
 
 Phù hợp cho: video kể chuyện ngắn, bài giảng, giải thích kiến thức, nội dung TikTok/Reels/Shorts.
 
-> Phát triển tiếp từ repo gốc [geeklee/srt-whiteboard-animation](https://github.com/geeklee/srt-whiteboard-animation) của tác giả 江哥是老登啊. Bản này bổ sung: giọng đọc tiếng Việt (Vbee, Edge TTS), làm video từ chủ đề/kịch bản, chế độ nhịp gọn, gắn phụ đề và tài liệu tiếng Việt.
+> Phát triển tiếp từ repo gốc [geeklee/srt-whiteboard-animation](https://github.com/geeklee/srt-whiteboard-animation) của tác giả 江哥是老登啊. Bản này bổ sung: giọng đọc tiếng Việt (CIT Voice Studio, Vbee, Edge TTS), làm video từ chủ đề/kịch bản, chế độ nhịp gọn, gắn phụ đề và tài liệu tiếng Việt.
 
 ## Xem thử
 
@@ -21,7 +21,7 @@ Phù hợp cho: video kể chuyện ngắn, bài giảng, giải thích kiến t
 ## Nó làm được gì
 
 - Viết kịch bản từ một chủ đề và dừng để bạn duyệt.
-- Tạo giọng đọc bằng Vbee hoặc Edge TTS, sau đó sinh SRT theo thời lượng giọng thật.
+- Tạo giọng đọc bằng CIT Voice Studio (mặc định, offline), Vbee hoặc Edge TTS, sau đó sinh SRT theo thời lượng giọng thật.
 - Đọc SRT và gợi ý chia thành các cảnh dài 20–35 giây.
 - Mỗi cảnh là **một ảnh nét vẽ**, được chia thành nhiều **vùng** (nhân vật, đồ vật, bối cảnh).
 - Các vùng được vẽ **theo thứ tự lời kể**, không phải từ trái sang phải. Vùng chưa tới lượt thì hoàn toàn ẩn.
@@ -40,7 +40,19 @@ git clone https://github.com/Cuongyd196/whiteboard-video.git
 cd whiteboard-video
 ```
 
-Mở thư mục `whiteboard-video` bằng AI agent như Codex, Claude Code hoặc Antigravity. Repo đã có sẵn [SKILL.md](SKILL.md), vì vậy bạn chỉ cần yêu cầu agent dùng skill:
+Mở thư mục `whiteboard-video` bằng AI agent. Repo đã khai báo skill sẵn cho các agent phổ biến, agent tự nhận ra skill mà không cần cài thêm:
+
+| Agent | Agent đọc file |
+|---|---|
+| Claude Code | `.claude/skills/whiteboard-video/SKILL.md` |
+| Codex (CLI / app / IDE) | `.agents/skills/whiteboard-video/SKILL.md` |
+| Google Antigravity | `.agent/skills/whiteboard-video/SKILL.md` |
+| Gemini CLI | `GEMINI.md` |
+| Cursor, GitHub Copilot, agent khác | `AGENTS.md` |
+
+Các file trên chỉ trỏ về [SKILL.md](SKILL.md) ở thư mục gốc, nơi chứa toàn bộ quy trình — sửa một chỗ, mọi agent đều nhận. Nếu đổi `name` / `description` ở đầu `SKILL.md`, chạy `python scripts/sync_skill_entries.py` để cập nhật các file lối vào.
+
+Bạn chỉ cần yêu cầu agent dùng skill:
 
 ```text
 Dùng skill whiteboard-video làm video vẽ tay 60 giây về chủ đề "cho đi và nhận lại".
@@ -108,6 +120,7 @@ Agent **dừng lại sau mỗi bước** để bạn duyệt. Trả lời "ok / 
 
 ```text
 Gắn phụ đề vào video.
+Thêm giọng đọc bằng CIT Voice Studio, giọng Trúc Ly.
 Thêm giọng đọc bằng Edge TTS.
 Thêm giọng đọc Vbee, giọng n_hanoi_male_protrainer_education_vc.
 Giọng đọc và hình bớt khoảng lặng cho video hấp dẫn hơn.     ← chế độ nhịp gọn
@@ -152,20 +165,33 @@ cp .env.example .env        # Windows PowerShell: Copy-Item .env.example .env
 Các giá trị chính trong `.env`:
 
 ```env
-# edge = miễn phí, vbee = trả phí theo ký tự
-TTS_PROVIDER=edge
+# cit = CIT Voice Studio (mặc định, offline, miễn phí)
+# edge = Edge TTS (online, miễn phí), vbee = trả phí theo ký tự
+TTS_PROVIDER=cit
 
-# Vbee: dán nguyên mã giọng copy từ giao diện Vbee
-# Edge: vi-VN-NamMinhNeural (nam) hoặc vi-VN-HoaiMyNeural (nữ)
-TTS_VOICE=vi-VN-NamMinhNeural
+# Mỗi engine một nhóm cấu hình riêng; chỉ nhóm của engine đang chọn được dùng.
+# Tốc độ: 1.0 = bình thường, 1.1 = nhanh hơn 10%
 
-# Tốc độ đọc: 1.0 = bình thường, 1.1 = nhanh hơn 10%
-TTS_SPEED=1.1
+# --- CIT Voice Studio (mặc định chạy ở cổng 8001) ---
+CIT_BASE_URL=http://127.0.0.1:8001
+CIT_API_KEY=            # chỉ cần khi gọi từ máy khác trong LAN
+CIT_VOICE=Hải Đăng      # tên giọng như GET /voices, vd Hải Đăng, Trúc Ly, Mai Anh
+CIT_SPEED=1.0
 
-# Chỉ cần khi dùng Vbee
+# --- Edge TTS ---
+EDGE_VOICE=vi-VN-NamMinhNeural   # hoặc vi-VN-HoaiMyNeural (nữ)
+EDGE_SPEED=1.05
+
+# --- Vbee ---
 VBEE_APP_ID=...
 VBEE_ACCESS_TOKEN=...
+VBEE_VOICE=n_hanoi_male_protrainer_education_vc   # dán nguyên mã giọng copy từ Vbee
+VBEE_SPEED=1.1
 ```
+
+Đổi engine chỉ cần sửa `TTS_PROVIDER`, giọng/tốc độ của từng engine giữ nguyên. Biến cũ `TTS_VOICE` / `TTS_SPEED` vẫn được đọc làm dự phòng.
+
+**CIT Voice Studio** (engine mặc định): mở ứng dụng trước khi tạo giọng, kiểm tra bằng `http://127.0.0.1:8001/health` (`"status": "ok"`). Danh sách giọng: `http://127.0.0.1:8001/voices`. Chạy offline trên máy, không tốn phí. Giọng do AI tạo ra: khi đăng video công khai, ghi rõ "Giọng đọc được tạo bằng AI" ở mô tả.
 
 ## Quy trình làm một video
 
@@ -212,7 +238,7 @@ Không dùng agent? Chạy trực tiếp các script theo thứ tự dưới đ�
 python scripts/script_to_srt.py script.md --output draft.srt
 
 # Tạo giọng, sinh input.srt theo độ dài giọng thật (thêm một --pause cho mỗi mục trong PAUSES)
-<ENV_PY> scripts/tts_narration.py draft.srt --output narration.m4a --provider edge \
+<ENV_PY> scripts/tts_narration.py draft.srt --output narration.m4a \
   --retime-out input.srt --pause 1=0.8 --pause 8=0.8
 ```
 
@@ -258,6 +284,9 @@ ffmpeg -i final.mp4 -vf "subtitles=input.srt:force_style='FontName=Arial,FontSiz
 **7. Thêm giọng đọc**
 
 ```bash
+# CIT Voice Studio (mặc định, offline; --voice là tên giọng trong /voices)
+<ENV_PY> scripts/tts_narration.py input.srt --output narration.m4a --video final-sub.mp4 --voice "Trúc Ly"
+
 # Edge TTS (miễn phí)
 <ENV_PY> scripts/tts_narration.py input.srt --output narration.m4a --video final-sub.mp4 --provider edge
 
@@ -274,7 +303,7 @@ Khi phụ đề chia đều (ví dụ 5 giây/câu) nhưng giọng đọc ngắn
 
 ```bash
 # a) Tạo giọng + SRT mới theo độ dài giọng thật
-<ENV_PY> scripts/tts_narration.py input.srt --output narration.m4a --provider edge \
+<ENV_PY> scripts/tts_narration.py input.srt --output narration.m4a \
   --retime-out input.tight.srt --gap 0.3 --pause 6=0.8 --tail 1.0
 
 # b) Co thời gian vẽ trong các file annotation (file gốc giữ nguyên, ra file *.tight.annotation.json)
@@ -355,6 +384,11 @@ Mẹo: vùng vẽ sau luôn được tự động trừ ra khỏi vùng vẽ tr�
 ```text
 whiteboard-video/
 ├── SKILL.md                          # quy trình đầy đủ cho AI agent
+├── AGENTS.md                         # hướng dẫn chung cho mọi agent (Codex, Cursor, Copilot…)
+├── GEMINI.md                         # lối vào cho Gemini CLI
+├── .claude/skills/whiteboard-video/  # lối vào skill cho Claude Code
+├── .agents/skills/whiteboard-video/  # lối vào skill cho Codex
+├── .agent/skills/whiteboard-video/   # lối vào skill cho Antigravity
 ├── vbee.md                           # hướng dẫn API Vbee
 ├── assets/
 │   ├── drawing-hand.png              # ảnh bàn tay cầm bút
@@ -366,8 +400,9 @@ whiteboard-video/
 │   ├── render_annotation_preview.py  # ảnh kiểm tra vùng
 │   ├── render_stream_whiteboard.py   # render video vẽ tay
 │   ├── merge_scenes.py               # ghép các cảnh
-│   ├── tts_narration.py              # giọng đọc Vbee / Edge TTS
+│   ├── tts_narration.py              # giọng đọc CIT Voice Studio / Vbee / Edge TTS
 │   ├── retime_annotations.py         # co thời gian vẽ theo giọng đọc
+│   ├── sync_skill_entries.py         # sinh file lối vào skill cho từng agent
 │   └── prepare_env.py                # cài môi trường
 └── agents/openai.yaml
 ```
@@ -376,6 +411,9 @@ whiteboard-video/
 
 | Lỗi | Cách xử lý |
 |---|---|
+| `无法连接 CIT Voice Studio` | Chưa mở ứng dụng CIT Voice Studio hoặc sai `CIT_BASE_URL` → mở app, hoặc dùng `--provider edge` |
+| `CIT 当前模型没有声音 ...` | Tên giọng sai hoặc không thuộc mô hình đang chạy → xem `http://127.0.0.1:8001/voices` |
+| `CIT 模型未就绪` | Mô hình đang tải → đợi `/health` báo `"status": "ok"` |
 | `You have exceeded the API TTS quota` | Tài khoản Vbee hết quota API → nạp thêm hoặc dùng `--provider edge` |
 | `缺少 VBEE_APP_ID / VBEE_ACCESS_TOKEN` | Chưa khai báo key Vbee trong `.env` |
 | `需要系统 ffmpeg / ffprobe` | Cài ffmpeg và thêm vào PATH |
