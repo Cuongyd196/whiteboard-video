@@ -1,48 +1,72 @@
-# Chủ đề → Video vẽ tay bảng trắng
+<div align="center">
 
-Biến **một chủ đề, một kịch bản hoặc file phụ đề `.srt`** thành video vẽ tay (whiteboard animation) hoàn chỉnh. Nếu đầu vào là chủ đề, AI agent sẽ viết kịch bản, tạo giọng đọc và phụ đề, phân cảnh, tạo ảnh, dựng hiệu ứng bàn tay vẽ rồi xuất MP4.
+# Whiteboard Video
 
-Phù hợp cho: video kể chuyện ngắn, bài giảng, giải thích kiến thức, nội dung TikTok/Reels/Shorts.
+**Biến một chủ đề, kịch bản hoặc file phụ đề `.srt` thành video vẽ tay bảng trắng hoàn chỉnh, có giọng đọc và phụ đề tiếng Việt.**
 
-> Phát triển tiếp từ repo gốc [geeklee/srt-whiteboard-animation](https://github.com/geeklee/srt-whiteboard-animation) của tác giả 江哥是老登啊. Bản này bổ sung: giọng đọc tiếng Việt (CIT Voice Studio, Vbee, Edge TTS), làm video từ chủ đề/kịch bản, chế độ nhịp gọn, gắn phụ đề và tài liệu tiếng Việt.
+AI agent viết kịch bản · tạo giọng đọc · phân cảnh · tạo ảnh · dựng hiệu ứng bàn tay vẽ · xuất MP4
+
+[![License: MIT](https://img.shields.io/badge/gi%E1%BA%A5y%20ph%C3%A9p-MIT-64748b)](LICENSE)
+![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-3776ab)
+![ffmpeg](https://img.shields.io/badge/c%E1%BA%A7n-ffmpeg-007808)
+![AI agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Gemini%20%C2%B7%20Cursor-skill-0f766e)
+![Giọng đọc](https://img.shields.io/badge/gi%E1%BB%8Dng%20%C4%91%E1%BB%8Dc-CIT%20%C2%B7%20Edge%20%C2%B7%20Vbee-f97316)
+
+**[Xem thử](#xem-thử)** &nbsp;·&nbsp; **[Bắt đầu nhanh](#bắt-đầu-nhanh)** &nbsp;·&nbsp; **[Dùng với AI agent](#dùng-với-ai-agent)** &nbsp;·&nbsp; **[Cài đặt](#cài-đặt)** &nbsp;·&nbsp; **[Dùng bằng lệnh](#dùng-thủ-công-bằng-lệnh)** &nbsp;·&nbsp; **[Lỗi thường gặp](#lỗi-thường-gặp)** &nbsp;·&nbsp; **[Cộng đồng](#cộng-đồng-và-các-mẫu-video-khác)**
+
+<br>
+
+<img src="examples/cho-di-nhan-lai.gif" alt="Demo video vẽ tay: Cho đi và nhận lại" width="820">
+
+</div>
+
+<br>
+
+Phù hợp cho video kể chuyện ngắn, bài giảng, giải thích kiến thức và nội dung TikTok / Reels / Shorts.
+
+> [!NOTE]
+> Phát triển tiếp từ [geeklee/srt-whiteboard-animation](https://github.com/geeklee/srt-whiteboard-animation) của tác giả 江哥是老登啊. Bản này bổ sung giọng đọc tiếng Việt, làm video từ chủ đề / kịch bản, chế độ nhịp gọn, gắn phụ đề và tài liệu tiếng Việt.
 
 ## Xem thử
 
-**Dự án: Cho đi và nhận lại** — Nam trao chiếc ô duy nhất cho một cậu bé trú mưa; vài tuần sau, một người thợ xa lạ dừng lại giúp Nam sửa xe. Hai cảnh được vẽ lần lượt theo lời kể, từ hành động cho đi đến khi lòng tốt được tiếp nối.
+| Dự án | Nội dung | Xem |
+|---|---|---|
+| **Cho đi và nhận lại** | Nam trao chiếc ô duy nhất cho một cậu bé trú mưa; vài tuần sau, một người thợ xa lạ dừng lại giúp Nam sửa xe. Hai cảnh vẽ lần lượt theo lời kể. | Ảnh động ở trên · [cảnh 1](examples/cho-di-nhan-lai-scene-01.png) · [cảnh 2](examples/cho-di-nhan-lai-scene-02.png) |
+| **Vì sao điện thoại càng dùng càng chậm?** | Video giải thích kiến thức làm từ một chủ đề: ba nguyên nhân và cách khắc phục, có giọng đọc và phụ đề. | [Facebook Reel](https://www.facebook.com/reel/1645434740472048) |
 
-![Demo dự án Cho đi và nhận lại](examples/cho-di-nhan-lai.gif)
+## Tính năng
 
-Ảnh nét gốc: [cảnh trao ô](examples/cho-di-nhan-lai-scene-01.png) · [cảnh nhận lại](examples/cho-di-nhan-lai-scene-02.png).
+| ✍️ **Từ chủ đề đến video** | 🎙️ **Giọng đọc tiếng Việt** | 🖊️ **Vẽ theo lời kể** |
+|---|---|---|
+| Đưa một chủ đề, kịch bản hoặc file SRT. Agent viết kịch bản, phân cảnh, tạo ảnh và dựng video. | [CIT Voice Studio](https://github.com/Cuongyd196/cit-voice-studio) (offline, miễn phí), Edge TTS hoặc Vbee. Phụ đề sinh theo độ dài giọng thật. | Mỗi cảnh chia thành nhiều vùng, vẽ đúng thứ tự câu đang đọc. Vùng chưa tới lượt hoàn toàn ẩn. |
+| 🎨 **Nét bút liền mạch** | 🧭 **Chỉnh trực quan** | ⏱️ **Nhịp gọn** |
+| Đi nét đen trước (`ink`), tô màu sau (`color`), bàn tay cầm bút bám theo nét. | Trang xem trước trên trình duyệt để kéo chỉnh vùng, thứ tự và thời gian. | Với SRT có sẵn, co thời gian vẽ theo giọng đọc để bỏ khoảng lặng thừa. |
 
-**Dự án: Vì sao điện thoại càng dùng càng chậm?** — video giải thích kiến thức làm từ chủ đề: hai cảnh vẽ lần lượt ba nguyên nhân (bộ nhớ đầy, ứng dụng nặng, pin chai) và cách khắc phục, có giọng đọc và phụ đề tiếng Việt.
+## Bắt đầu nhanh
 
-🎬 [Xem video hoàn chỉnh trên Facebook Reel](https://www.facebook.com/reel/1645434740472048)
-
-## Nó làm được gì
-
-- Viết kịch bản từ một chủ đề và dừng để bạn duyệt.
-- Tạo giọng đọc bằng CIT Voice Studio (mặc định, offline), Vbee hoặc Edge TTS, sau đó sinh SRT theo thời lượng giọng thật.
-- Đọc SRT và gợi ý chia thành các cảnh dài 20–35 giây.
-- Mỗi cảnh là **một ảnh nét vẽ**, được chia thành nhiều **vùng** (nhân vật, đồ vật, bối cảnh).
-- Các vùng được vẽ **theo thứ tự lời kể**, không phải từ trái sang phải. Vùng chưa tới lượt thì hoàn toàn ẩn.
-- Mỗi vùng vẽ bằng nét bút liền mạch: đi nét đen trước (`ink`), tô màu sau (`color`).
-- Có trang xem trước trên trình duyệt để kéo chỉnh vùng, thứ tự, thời gian.
-- Render từng cảnh rồi ghép thành một video hoàn chỉnh.
-- Tự khớp hình, phụ đề và giọng đọc tiếng Việt.
-- Với SRT có sẵn, có chế độ **nhịp gọn** để loại bỏ khoảng lặng thừa.
-
-## Dùng như Skill cho AI agent (khuyên dùng)
-
-Clone repo về máy:
+**1. Tải repo và cài môi trường** (cần [Python 3.10+](https://www.python.org/downloads/) và [ffmpeg](https://ffmpeg.org/download.html) trong PATH)
 
 ```bash
 git clone https://github.com/Cuongyd196/whiteboard-video.git
 cd whiteboard-video
+python scripts/prepare_env.py
 ```
 
-Mở thư mục `whiteboard-video` bằng AI agent. Repo đã khai báo skill sẵn cho các agent phổ biến, agent tự nhận ra skill mà không cần cài thêm:
+**2. Cài giọng đọc** — tải [CIT Voice Studio](https://github.com/Cuongyd196/cit-voice-studio/releases/latest) và mở ứng dụng ([hướng dẫn](#cài-cit-voice-studio)). Không cài thì đặt `TTS_PROVIDER=edge` trong `.env` để dùng Edge TTS.
 
-| Agent | Agent đọc file |
+**3. Mở thư mục bằng AI agent và yêu cầu:**
+
+```text
+Dùng skill whiteboard-video làm video vẽ tay 60 giây về chủ đề "AI Agent khác chatbot ở điểm nào".
+```
+
+Agent làm từng bước và dừng chờ bạn duyệt. Muốn chạy một mạch tới MP4, nói thêm "thực hiện tự động tất cả các bước".
+
+## Dùng với AI agent
+
+Repo đã khai báo skill sẵn, agent tự nhận ra mà không cần cài thêm:
+
+| Agent | File agent đọc |
 |---|---|
 | Claude Code | `.claude/skills/whiteboard-video/SKILL.md` |
 | Codex (CLI / app / IDE) | `.agents/skills/whiteboard-video/SKILL.md` |
@@ -50,29 +74,24 @@ Mở thư mục `whiteboard-video` bằng AI agent. Repo đã khai báo skill s�
 | Gemini CLI | `GEMINI.md` |
 | Cursor, GitHub Copilot, agent khác | `AGENTS.md` |
 
-Các file trên chỉ trỏ về [SKILL.md](SKILL.md) ở thư mục gốc, nơi chứa toàn bộ quy trình — sửa một chỗ, mọi agent đều nhận. Nếu đổi `name` / `description` ở đầu `SKILL.md`, chạy `python scripts/sync_skill_entries.py` để cập nhật các file lối vào.
+Các file trên chỉ trỏ về [SKILL.md](SKILL.md) ở thư mục gốc, nơi chứa toàn bộ quy trình: sửa một chỗ, mọi agent đều nhận. Nếu đổi `name` / `description` ở đầu `SKILL.md`, chạy `python scripts/sync_skill_entries.py` để cập nhật các file lối vào.
 
-Bạn chỉ cần yêu cầu agent dùng skill:
-
-```text
-Dùng skill whiteboard-video làm video vẽ tay 60 giây về chủ đề "cho đi và nhận lại".
-```
-
-Agent sẽ đọc hướng dẫn trong skill, làm từng bước và dừng để bạn duyệt trước khi tiếp tục. Bạn cũng có thể đưa một kịch bản hoặc file SRT có sẵn.
-
-### Bắt đầu từ chủ đề hoặc kịch bản (không cần SRT)
-
-Skill nhận 3 kiểu đầu vào:
+### Ba kiểu đầu vào
 
 | Bạn có | Agent bắt đầu từ |
 |---|---|
 | **Một chủ đề** ("cho đi và nhận lại") | Viết kịch bản → bạn duyệt |
 | **Một kịch bản** (đoạn văn lời dẫn) | Tạo giọng đọc → tự sinh SRT khớp giọng |
-| **File SRT** | Chia cảnh (như cũ) |
+| **File SRT** | Chia cảnh |
 
-Với chủ đề hoặc kịch bản, skill làm theo kiểu **giọng đọc dẫn nhịp**: đọc trước, lấy độ dài giọng thật làm mốc phụ đề, rồi mới vẽ theo mốc đó. Video ra **không có khoảng lặng thừa** mà không cần bước "nhịp gọn".
+Với chủ đề hoặc kịch bản, skill làm theo kiểu **giọng đọc dẫn nhịp**: đọc trước, lấy độ dài giọng thật làm mốc phụ đề rồi mới vẽ theo mốc đó, nên video không có khoảng lặng thừa.
 
-Ví dụ từ chủ đề:
+<details>
+<summary><b>Ví dụ câu lệnh</b></summary>
+
+<br>
+
+Từ chủ đề:
 
 ```text
 Dùng skill whiteboard-video làm video vẽ tay 60 giây, chủ đề "cho đi và nhận lại".
@@ -80,7 +99,7 @@ Kể bằng một câu chuyện ngắn, giọng ấm, kết bằng một câu đ
 Trả lời bằng tiếng Việt.
 ```
 
-Ví dụ từ kịch bản có sẵn:
+Từ kịch bản có sẵn:
 
 ```text
 Dùng skill whiteboard-video làm video hoàn chỉnh từ kịch bản dưới đây.
@@ -91,32 +110,7 @@ Cho đi rồi, liệu có nhận lại không?
 Chiều ấy, Nam thấy một cậu bé ôm chồng sách đứng trú mưa. ...
 ```
 
-Các bước agent sẽ đi qua (mỗi bước dừng chờ bạn duyệt):
-
-1. **Kịch bản** (chỉ khi đưa chủ đề) → lưu `script.md`.
-2. **Giọng đọc + SRT** → cắt câu, tạo giọng, sinh `input.srt` theo giọng thật. Nghe thử `narration.m4a` rồi duyệt.
-3. **Phân cảnh → ảnh nét vẽ → chia vùng → render → ghép** (như quy trình SRT).
-4. **Hoàn thiện** → gắn phụ đề + ghép giọng đọc → video cuối.
-
-Mẹo viết kịch bản: mỗi câu ngắn (đọc ≤ 5 giây), có hình ảnh cụ thể (người, đồ vật, hành động) để dễ vẽ; **cách một dòng trống giữa các đoạn** để tạo khoảng nghỉ dài hơn khi đọc.
-
-### Trò chuyện qua từng bước
-
-Agent **dừng lại sau mỗi bước** để bạn duyệt. Trả lời "ok / chốt" để đi tiếp, hoặc nói cần sửa gì — agent chỉ làm lại đúng bước đó.
-
-| Bước | Agent làm | Bạn trả lời (ví dụ) |
-|---|---|---|
-| 1. Phân cảnh | Đọc SRT, chia cảnh, đề xuất hình cho từng cảnh | "ok" · "gộp thành 2 cảnh" · "cảnh 2 thêm hình chiếc ô" |
-| 2. Ảnh nét vẽ | Tạo ảnh hoặc viết prompt vào `IMAGE_PROMPTS.md` | "ok" · "nhân vật Nam ở 2 cảnh phải giống nhau" |
-| 3. Chia vùng | Tạo `*.annotation.json`, mở trang xem trước | "ok" · "vẽ cậu bé trước chiếc ô" |
-| 4. Ảnh kiểm tra vùng | Xuất ảnh đánh số vùng | "ok" · "vùng 3 rộng thêm sang phải" |
-| 5. Chỉnh trên trình duyệt | (Bạn tự kéo chỉnh nếu muốn, bấm Lưu) | "chốt rồi triển" |
-| 6. Render từng cảnh | Render MP4, xem khung đầu/giữa/cuối | "ok" · "cảnh 1 vẽ nhanh hơn" |
-| 7. Ghép | Ghép thành một video | "ghép thành video hoàn chỉnh" |
-
-> **Ảnh nét vẽ:** nếu agent không tự tạo ảnh được, nó sẽ ghi prompt vào `IMAGE_PROMPTS.md`. Bạn dùng prompt đó với công cụ tạo ảnh (ChatGPT, Gemini…), lưu ảnh đúng tên `scene-01-<tên>.png` vào thư mục dự án rồi báo agent.
-
-### Các yêu cầu hay dùng sau khi có video
+Sau khi có video:
 
 ```text
 Gắn phụ đề vào video.
@@ -130,46 +124,85 @@ Cảnh 2 vẽ chiếc ô trước bác thợ.
 Thay cây bút, không hiển thị chữ trên thân bút.
 ```
 
-Agent sẽ tự chọn đúng script, chạy lại phần cần thiết (giọng đã tạo được lấy từ cache, không tốn phí lần 2) và kiểm tra kết quả trước khi báo lại.
+Agent tự chọn đúng script, chỉ chạy lại phần cần thiết (giọng đã tạo lấy từ cache, không tốn phí lần 2) và kiểm tra kết quả trước khi báo lại.
+
+</details>
+
+### Duyệt qua từng bước
+
+Agent **dừng lại sau mỗi bước** để bạn duyệt. Trả lời "ok" để đi tiếp, hoặc nói cần sửa gì: agent chỉ làm lại đúng bước đó.
+
+| Bước | Agent làm | Bạn trả lời (ví dụ) |
+|---|---|---|
+| Kịch bản | Viết lời dẫn từ chủ đề, lưu `script.md` | "ok" · "ngắn lại còn 45 giây" |
+| Giọng đọc | Cắt câu, tạo giọng, sinh `input.srt` | "ok" · "đổi giọng Trúc Ly" |
+| Phân cảnh | Chia cảnh, đề xuất hình cho từng cảnh | "ok" · "gộp thành 2 cảnh" |
+| Ảnh nét vẽ | Tạo ảnh hoặc viết prompt vào `IMAGE_PROMPTS.md` | "ok" · "nhân vật ở 2 cảnh phải giống nhau" |
+| Chia vùng | Tạo `*.annotation.json`, mở trang xem trước | "ok" · "vẽ cậu bé trước chiếc ô" |
+| Ảnh kiểm tra vùng | Xuất ảnh đánh số vùng | "ok" · "vùng 3 rộng thêm sang phải" |
+| Render | Render từng cảnh, xem khung đầu / giữa / cuối | "ok" · "cảnh 1 vẽ nhanh hơn" |
+| Hoàn thiện | Ghép cảnh, gắn phụ đề và giọng đọc | "ok" |
+
+> [!TIP]
+> Nếu agent không tự tạo ảnh được, nó ghi prompt vào `IMAGE_PROMPTS.md`. Dùng prompt đó với ChatGPT, Gemini, Canva…, lưu ảnh đúng tên `scene-01-<tên>.png` vào thư mục dự án rồi báo agent.
 
 ### Mẹo để có video đẹp
 
-- **Mỗi cảnh một ý chính**, 20–35 giây. Video 60 giây thường chia 2 cảnh.
-- **Mỗi câu phụ đề nên ngắn** (≤ 5 giây đọc) để hình và giọng khớp nhau.
-- Yêu cầu hình **tách rời nhau, không chồng lên** — chia vùng dễ, bút vẽ tự nhiên hơn.
-- Luôn **xem ảnh kiểm tra vùng** (bước 4) trước khi render — sửa ở đây nhanh hơn nhiều so với render lại.
-- Nếu bắt đầu từ chủ đề hoặc kịch bản, SRT đã được tạo theo giọng đọc thật nên không cần chạy **nhịp gọn**. Chế độ này chủ yếu dành cho SRT có sẵn bị dư khoảng lặng.
-- Key Vbee để trong `.env`, **không dán key vào khung chat**.
+- **Mỗi cảnh một ý chính**, 20–35 giây. Video 60 giây thường chia 2–3 cảnh.
+- **Mỗi câu ngắn** (đọc ≤ 5 giây), có hình ảnh cụ thể (người, đồ vật, hành động). **Cách một dòng trống giữa các đoạn** để có khoảng nghỉ dài hơn.
+- Yêu cầu hình **tách rời nhau, không chồng lên**: chia vùng dễ hơn, bút vẽ tự nhiên hơn.
+- Luôn **xem ảnh kiểm tra vùng** trước khi render: sửa ở đây nhanh hơn nhiều so với render lại.
+- Chế độ **nhịp gọn** chỉ cần cho SRT có sẵn bị dư khoảng lặng.
 
 ## Cài đặt
 
-Cần có **Python 3.10+** và **ffmpeg** (có trong PATH).
+### Yêu cầu
+
+| Thành phần | Ghi chú |
+|---|---|
+| Python 3.10+ | Script tự tạo `.venv` riêng |
+| ffmpeg / ffprobe | Có trong PATH |
+| Giọng đọc | [CIT Voice Studio](#cài-cit-voice-studio) (mặc định), Edge TTS hoặc Vbee |
+| Chrome / Edge | Cho trang xem trước `assets/preview.html` |
 
 ```bash
 python scripts/prepare_env.py          # tạo .venv và cài opencv, numpy, av, Pillow, edge-tts
 python scripts/prepare_env.py --check  # chỉ kiểm tra; dòng cuối in ENV_PY=<đường dẫn python>
 ```
 
-Các lệnh bên dưới dùng `<ENV_PY>` là Python trong `.venv`:
-- Windows: `.\.venv\Scripts\python.exe`
-- macOS/Linux: `.venv/bin/python`
+Các lệnh trong tài liệu dùng `<ENV_PY>` là Python trong `.venv`: Windows `.\.venv\Scripts\python.exe`, macOS / Linux `.venv/bin/python`.
 
-### Cấu hình giọng đọc (tuỳ chọn)
+### Cài CIT Voice Studio
 
-Sao chép file mẫu rồi điền giá trị (`.env` đã nằm trong `.gitignore`, **đừng commit**):
+[CIT Voice Studio](https://github.com/Cuongyd196/cit-voice-studio) chuyển văn bản tiếng Việt thành giọng nói, chạy offline ngay trên máy, miễn phí, có 25 giọng tiếng Việt.
+
+1. Vào [trang tải về (Releases)](https://github.com/Cuongyd196/cit-voice-studio/releases/latest), chọn file theo máy:
+
+   | Máy | File | Cài đặt |
+   |---|---|---|
+   | Windows 10/11 | `.exe` | Bấm đúp, không cần quyền Administrator. Gặp "Windows protected your PC" thì bấm **More info** → **Run anyway** |
+   | macOS | `.dmg` (`arm64` chip Apple, `x86_64` chip Intel) | Kéo vào **Applications**. Lần đầu bị chặn thì vào **System Settings → Privacy & Security** → **Open Anyway** |
+   | Ubuntu / Debian | `.deb` | `sudo apt install ./CIT-Voice-Studio-*.deb`, mở bằng lệnh `cit-voice-studio` |
+
+2. Mở ứng dụng và để chạy trong lúc làm video. Máy cần khoảng 8 GB RAM và 3 GB ổ trống.
+3. Kiểm tra `http://127.0.0.1:8001/health` trả về `"status": "ok"`. Danh sách giọng ở `http://127.0.0.1:8001/voices`; điền tên giọng (có dấu) vào `CIT_VOICE`.
+
+> [!IMPORTANT]
+> Giọng do AI tạo ra. Khi đăng video công khai, ghi rõ "Giọng đọc được tạo bằng AI" ở phần mô tả.
+
+### Cấu hình giọng đọc
+
+Sao chép file mẫu rồi điền giá trị. `.env` đã nằm trong `.gitignore`, **đừng commit key**.
 
 ```bash
 cp .env.example .env        # Windows PowerShell: Copy-Item .env.example .env
 ```
-
-Các giá trị chính trong `.env`:
 
 ```env
 # cit = CIT Voice Studio (mặc định, offline, miễn phí)
 # edge = Edge TTS (online, miễn phí), vbee = trả phí theo ký tự
 TTS_PROVIDER=cit
 
-# Mỗi engine một nhóm cấu hình riêng; chỉ nhóm của engine đang chọn được dùng.
 # Tốc độ: 1.0 = bình thường, 1.1 = nhanh hơn 10%
 
 # --- CIT Voice Studio (mặc định chạy ở cổng 8001) ---
@@ -189,49 +222,46 @@ VBEE_VOICE=n_hanoi_male_protrainer_education_vc   # dán nguyên mã giọng cop
 VBEE_SPEED=1.1
 ```
 
-Đổi engine chỉ cần sửa `TTS_PROVIDER`, giọng/tốc độ của từng engine giữ nguyên. Biến cũ `TTS_VOICE` / `TTS_SPEED` vẫn được đọc làm dự phòng.
-
-**CIT Voice Studio** (engine mặc định): mở ứng dụng trước khi tạo giọng, kiểm tra bằng `http://127.0.0.1:8001/health` (`"status": "ok"`). Danh sách giọng: `http://127.0.0.1:8001/voices`. Chạy offline trên máy, không tốn phí. Giọng do AI tạo ra: khi đăng video công khai, ghi rõ "Giọng đọc được tạo bằng AI" ở mô tả.
+Mỗi engine một nhóm cấu hình riêng; đổi engine chỉ cần sửa `TTS_PROVIDER`. Biến cũ `TTS_VOICE` / `TTS_SPEED` vẫn được đọc làm dự phòng.
 
 ## Quy trình làm một video
 
-Luồng đầy đủ khi đầu vào là **một chủ đề**. Mỗi bước hoàn thành, agent sẽ **dừng lại để bạn duyệt** rồi mới làm bước tiếp theo.
+Luồng đầy đủ khi đầu vào là **một chủ đề**. Đầu vào là kịch bản thì bắt đầu từ bước 0b; là SRT thì bắt đầu từ bước 1 (bước 8 chỉ chạy khi bạn yêu cầu).
 
 | Bước | Việc cần làm | Kết quả |
-|---|---|---|
+|:---:|---|---|
 | 0a | Viết kịch bản từ chủ đề | `script.md` |
-| 0b | Tạo giọng đọc, lấy thời lượng giọng thật để sinh phụ đề | `narration.m4a`, `input.srt` |
-| 1 | Đọc SRT, chia cảnh và đề xuất hình cho từng cảnh | Bảng phân cảnh |
+| 0b | Tạo giọng đọc, sinh phụ đề theo thời lượng giọng thật | `narration.m4a`, `input.srt` |
+| 1 | Chia cảnh và đề xuất hình cho từng cảnh | Bảng phân cảnh |
 | 2 | Tạo ảnh nét vẽ 16:9, nền kem `#F5EBD7` | `scene-XX-<tên>.png` |
-| 3 | Xem ảnh, chia vùng theo mạch kể và mở trang xem trước | `scene-XX-<tên>.annotation.json` |
-| 4 | Xuất ảnh đánh số để kiểm tra vùng và thứ tự vẽ | `scene-XX-<tên>-regions.png` |
-| 5 | Chỉnh vùng, thứ tự và thời gian trên trang xem trước | File annotation đã cập nhật |
+| 3 | Chia vùng theo mạch kể, mở trang xem trước | `scene-XX-<tên>.annotation.json` |
+| 4 | Xuất ảnh đánh số để kiểm tra vùng và thứ tự | `scene-XX-<tên>-regions.png` |
+| 5 | Chỉnh vùng, thứ tự, thời gian trên trang xem trước | Annotation đã cập nhật |
 | 6 | Render và kiểm tra từng cảnh | `scene-XX-<tên>-whiteboard.mp4` |
-| 7 | Ghép các cảnh theo đúng thứ tự | Video hình hoàn chỉnh |
-| 8 | Gắn phụ đề và ghép giọng đọc đã tạo ở bước 0b | Video cuối |
+| 7 | Ghép các cảnh theo thứ tự | Video hình hoàn chỉnh |
+| 8 | Gắn phụ đề và ghép giọng đọc | Video cuối |
 
-Nếu đầu vào là **kịch bản**, bắt đầu từ bước 0b. Nếu đầu vào là **SRT**, bắt đầu từ bước 1; bước 8 chỉ tạo hoặc ghép giọng đọc khi bạn yêu cầu.
-
-### Thư mục dự án
+Mỗi dự án nằm trong một thư mục riêng:
 
 ```text
 assets/whiteboard/<tên-dự-án>/
-├── script.md                          # kịch bản khi bắt đầu từ chủ đề/kịch bản
+├── script.md                          # kịch bản (khi bắt đầu từ chủ đề/kịch bản)
 ├── narration.m4a                      # giọng đọc hoàn chỉnh
-├── input.srt
-├── scene-01-<tên>.png                  # ảnh nét vẽ
-├── scene-01-<tên>.annotation.json      # chia vùng + thời gian (cùng tên với ảnh)
-├── scene-01-<tên>-whiteboard.mp4       # video cảnh 1
-└── tts-cache/                          # giọng đọc đã tạo (dùng lại, không tốn phí lần 2)
+├── input.srt                          # phụ đề chính thức
+├── scene-01-<tên>.png                 # ảnh nét vẽ
+├── scene-01-<tên>.annotation.json     # chia vùng + thời gian (cùng tên với ảnh)
+├── scene-01-<tên>-whiteboard.mp4      # video cảnh 1
+└── tts-cache/                         # giọng từng câu (dùng lại, không tốn phí lần 2)
 ```
 
 Ảnh và file JSON **phải cùng tên**: `scene-01-demo.png` ↔ `scene-01-demo.annotation.json`.
 
 ## Dùng thủ công bằng lệnh
 
-Không dùng agent? Chạy trực tiếp các script theo thứ tự dưới đây.
+Không dùng agent thì chạy trực tiếp các script theo thứ tự dưới đây.
 
-**0. (Nếu bắt đầu từ kịch bản) Kịch bản → SRT theo giọng đọc**
+<details>
+<summary><b>0. Kịch bản → SRT theo giọng đọc</b> (khi bắt đầu từ kịch bản)</summary>
 
 ```bash
 # Cắt kịch bản thành câu, ra SRT nháp; dòng cuối in PAUSES=1=0.8,8=0.8,... (câu cuối mỗi đoạn)
@@ -242,49 +272,53 @@ python scripts/script_to_srt.py script.md --output draft.srt
   --retime-out input.srt --pause 1=0.8 --pause 8=0.8
 ```
 
-Từ đây dùng `input.srt` cho các bước bên dưới; ở bước 7 giọng đọc được lấy lại từ cache.
+Từ đây dùng `input.srt` cho các bước sau; ở bước 7 giọng đọc được lấy lại từ cache.
 
-**1. Đọc phụ đề, gợi ý chia cảnh**
+</details>
+
+<details>
+<summary><b>1–3. Chia cảnh, kiểm tra vùng, chỉnh trực quan</b></summary>
 
 ```bash
+# 1. Đọc phụ đề, gợi ý chia cảnh
 python scripts/parse_srt.py input.srt --target-sec 30 --min-sec 25 --max-sec 35
-```
 
-**2. Xuất ảnh kiểm tra vùng**
-
-```bash
+# 2. Xuất ảnh kiểm tra vùng
 <ENV_PY> scripts/render_annotation_preview.py <ảnh.png> <ảnh.annotation.json> <ảnh-regions.png>
 ```
 
-**3. Chỉnh sửa trực quan** — mở `assets/preview.html` bằng Chrome/Edge → bấm "Mở thư mục" → chọn thư mục dự án. Kéo khung để sửa vùng, kéo danh sách để đổi thứ tự, sửa thời gian bắt đầu/kết thúc, rồi bấm Lưu.
+**3. Chỉnh sửa trực quan:** mở `assets/preview.html` bằng Chrome / Edge → bấm "Mở thư mục" → chọn thư mục dự án. Kéo khung để sửa vùng, kéo danh sách để đổi thứ tự, sửa thời gian bắt đầu / kết thúc, rồi bấm Lưu.
 
-**4. Render một cảnh**
+</details>
+
+<details>
+<summary><b>4–5. Render và ghép cảnh</b></summary>
 
 ```bash
+# 4. Render một cảnh
 <ENV_PY> scripts/render_stream_whiteboard.py <ảnh.png> <ảnh.annotation.json> <ra.mp4> assets/drawing-hand.png \
   --ink-path skeleton --color-fill contour-wipe
-```
 
-- `--ink-path grid` (mặc định, ổn định) hoặc `skeleton` (bám nét hơn, hợp với ảnh nét rõ).
-- `--color-fill contour-wipe` (quét theo viền, mặc định) hoặc `brush` (tô theo nét bút).
-
-**5. Ghép các cảnh**
-
-```bash
+# 5. Ghép các cảnh
 <ENV_PY> scripts/merge_scenes.py --inputs canh1.mp4 canh2.mp4 --output final.mp4
 ```
 
-**6. Gắn phụ đề vào video** (chữ xám trên nền màu giấy)
+| Tuỳ chọn | Giá trị |
+|---|---|
+| `--ink-path` | `grid` (mặc định, ổn định) · `skeleton` (bám nét hơn, hợp ảnh nét rõ) |
+| `--color-fill` | `contour-wipe` (quét theo viền, mặc định) · `brush` (tô theo nét bút) |
+
+</details>
+
+<details>
+<summary><b>6–7. Gắn phụ đề và giọng đọc</b></summary>
 
 ```bash
+# 6. Gắn phụ đề (chữ xám trên nền màu giấy, không đè nét vẽ)
 ffmpeg -i final.mp4 -vf "subtitles=input.srt:force_style='FontName=Arial,FontSize=15,PrimaryColour=&H00303030,OutlineColour=&H10D7EBF5,BorderStyle=3,Outline=6,Shadow=0,MarginV=14'" \
   -c:v libx264 -crf 20 -pix_fmt yuv420p final-sub.mp4
-```
 
-**7. Thêm giọng đọc**
-
-```bash
-# CIT Voice Studio (mặc định, offline; --voice là tên giọng trong /voices)
+# 7. Thêm giọng đọc — CIT Voice Studio (mặc định; --voice là tên giọng trong /voices)
 <ENV_PY> scripts/tts_narration.py input.srt --output narration.m4a --video final-sub.mp4 --voice "Trúc Ly"
 
 # Edge TTS (miễn phí)
@@ -295,34 +329,44 @@ ffmpeg -i final.mp4 -vf "subtitles=input.srt:force_style='FontName=Arial,FontSiz
   --provider vbee --voice n_hanoi_male_protrainer_education_vc
 ```
 
-Kết quả: `final-sub-voice.mp4`. Mỗi câu được đặt đúng mốc phụ đề; câu nào đọc dài hơn khung thời gian sẽ được tăng tốc nhẹ và có cảnh báo. Khoảng lặng đầu/cuối của mỗi câu được cắt tự động (tắt bằng `--no-trim`).
+Kết quả: `final-sub-voice.mp4`. Mỗi câu đặt đúng mốc phụ đề; câu đọc dài hơn khung thời gian được tăng tốc nhẹ và có cảnh báo. Khoảng lặng đầu / cuối mỗi câu được cắt tự động (tắt bằng `--no-trim`).
 
-**8. Nhịp gọn — bỏ khoảng lặng thừa**
+</details>
 
-Khi phụ đề chia đều (ví dụ 5 giây/câu) nhưng giọng đọc ngắn hơn, video sẽ có nhiều chỗ im lặng. Cách xử lý: lấy độ dài giọng thật làm chuẩn, rồi co thời gian vẽ theo.
+<details>
+<summary><b>8. Nhịp gọn: bỏ khoảng lặng thừa</b></summary>
+
+Khi phụ đề chia đều (ví dụ 5 giây / câu) nhưng giọng đọc ngắn hơn, video có nhiều chỗ im lặng. Cách xử lý: lấy độ dài giọng thật làm chuẩn rồi co thời gian vẽ theo.
 
 ```bash
 # a) Tạo giọng + SRT mới theo độ dài giọng thật
 <ENV_PY> scripts/tts_narration.py input.srt --output narration.m4a \
   --retime-out input.tight.srt --gap 0.3 --pause 6=0.8 --tail 1.0
 
-# b) Co thời gian vẽ trong các file annotation (file gốc giữ nguyên, ra file *.tight.annotation.json)
+# b) Co thời gian vẽ trong annotation (file gốc giữ nguyên, ra *.tight.annotation.json)
 <ENV_PY> scripts/retime_annotations.py --old-srt input.srt --new-srt input.tight.srt \
   --annotations scene-01-a.annotation.json scene-02-b.annotation.json
 
-# c) Render lại các cảnh bằng *.tight.annotation.json, ghép, gắn phụ đề input.tight.srt,
-#    rồi chạy bước 7 với input.tight.srt (giọng lấy từ cache, không tạo lại)
+# c) Render lại bằng *.tight.annotation.json, ghép, gắn phụ đề input.tight.srt,
+#    rồi chạy bước 7 với input.tight.srt (giọng lấy từ cache)
 ```
 
-- `--gap 0.3`: nghỉ 0,3 giây giữa các câu.
-- `--pause 6=0.8`: sau câu số 6 nghỉ lâu hơn (0,8 giây) để tạo điểm nhấn. Dùng được nhiều lần.
-- `--tail 1.0`: giữ hình hoàn chỉnh 1 giây ở cuối video.
+| Tham số | Ý nghĩa |
+|---|---|
+| `--gap 0.3` | Nghỉ 0,3 giây giữa các câu |
+| `--pause 6=0.8` | Sau câu số 6 nghỉ lâu hơn (0,8 giây) để tạo điểm nhấn; dùng được nhiều lần |
+| `--tail 1.0` | Giữ hình hoàn chỉnh 1 giây ở cuối video |
 
 Ví dụ thực tế: video 60 giây rút còn khoảng 38 giây, giọng đọc gần như liên tục, bút luôn vẽ đúng thứ đang được kể.
 
-## Chia vùng (file annotation.json)
+</details>
 
-Toạ độ tính bằng **pixel nguyên** trên ảnh gốc (gốc toạ độ ở góc trên bên trái). Thứ tự vẽ nên theo mạch: **bối cảnh → nhân vật/đồ vật chính → hành động/biến đổi → phản ứng/kết quả**.
+## Chia vùng (annotation.json)
+
+Toạ độ tính bằng **pixel nguyên** trên ảnh gốc, gốc toạ độ ở góc trên bên trái. Thứ tự vẽ nên theo mạch **bối cảnh → nhân vật / đồ vật chính → hành động / biến đổi → phản ứng / kết quả**.
+
+<details>
+<summary><b>Ví dụ và ý nghĩa các trường</b></summary>
 
 ```json
 {
@@ -356,30 +400,35 @@ Toạ độ tính bằng **pixel nguyên** trên ảnh gốc (gốc toạ độ 
 | `canvas` | Kích thước ảnh gốc, phải khớp chính xác |
 | `sceneDurationMs` | Tổng thời lượng cảnh (ms) |
 | `sequence` | Thứ tự vẽ, bắt đầu từ 1 |
-| `subtitle` | Câu phụ đề ứng với vùng này |
+| `subtitle` | Câu phụ đề ứng với vùng |
 | `region` | Khung chữ nhật của vùng |
-| `reveal.startMs` / `durationMs` | Lúc bắt đầu vẽ và thời gian vẽ vùng (2/3 đi nét, 1/3 tô màu) |
-| `protectedRegions` | Các khung **không được vẽ** trong vùng này (để dành cho vùng vẽ sau), dùng khi các vùng chồng nhau |
+| `reveal.startMs` / `durationMs` | Lúc bắt đầu vẽ và thời gian vẽ (2/3 đi nét, 1/3 tô màu) |
+| `protectedRegions` | Các khung **không được vẽ** trong vùng này, dùng khi các vùng chồng nhau |
 | `direction`, `handPath` | Chỉ dùng cho trang xem trước; nét bút thật do trình render tự tính |
 
-Mẹo: vùng vẽ sau luôn được tự động trừ ra khỏi vùng vẽ trước, nên vùng nền lớn (ví dụ cả khung hình) sẽ không làm lộ nhân vật trước lượt.
+Vùng vẽ sau luôn được tự động trừ khỏi vùng vẽ trước, nên vùng nền lớn không làm lộ nhân vật trước lượt.
+
+</details>
 
 ## Quy chuẩn hình ảnh
 
 - Nền giấy màu kem `#F5EBD7`, nét phác xám đậm, tối giản, nhiều khoảng trống.
 - Chỉ dùng chút đỏ, cam, xanh dương làm điểm nhấn.
 - **Không** có chữ, số, logo trong ảnh; không ảnh chụp, 3D hay nền rối.
-- Các nhân vật/đồ vật nên tách nhau để dễ chia vùng.
+- Nhân vật / đồ vật tách nhau để dễ chia vùng.
 
-## Kiểm tra trước khi xuất bản
+**Kiểm tra trước khi xuất bản:**
 
-- Khung hình đầu tiên là nền giấy trơn, chưa lộ nét nào.
-- Giữa video: vùng chưa tới lượt không bị lộ ra.
-- Bút luôn nằm sát nét đang vẽ.
-- Cuối mỗi cảnh giữ hình hoàn chỉnh ít nhất 0,5 giây.
-- Giọng đọc khớp với phụ đề và hình đang vẽ.
+- [ ] Khung hình đầu là nền giấy trơn, chưa lộ nét nào.
+- [ ] Giữa video, vùng chưa tới lượt không bị lộ.
+- [ ] Bút luôn nằm sát nét đang vẽ.
+- [ ] Cuối mỗi cảnh giữ hình hoàn chỉnh ít nhất 0,5 giây.
+- [ ] Giọng đọc khớp với phụ đề và hình đang vẽ.
 
 ## Cấu trúc thư mục
+
+<details>
+<summary><b>Xem cây thư mục</b></summary>
 
 ```text
 whiteboard-video/
@@ -392,7 +441,8 @@ whiteboard-video/
 ├── vbee.md                           # hướng dẫn API Vbee
 ├── assets/
 │   ├── drawing-hand.png              # ảnh bàn tay cầm bút
-│   └── preview.html                  # trang xem trước / chỉnh sửa
+│   ├── preview.html                  # trang xem trước / chỉnh sửa
+│   └── whiteboard/                   # dự án video (chỉ commit dự án mẫu)
 ├── examples/                         # ví dụ minh hoạ
 ├── scripts/
 │   ├── script_to_srt.py              # cắt kịch bản thành câu → SRT nháp
@@ -407,21 +457,45 @@ whiteboard-video/
 └── agents/openai.yaml
 ```
 
+</details>
+
 ## Lỗi thường gặp
 
 | Lỗi | Cách xử lý |
 |---|---|
-| `无法连接 CIT Voice Studio` | Chưa mở ứng dụng CIT Voice Studio hoặc sai `CIT_BASE_URL` → mở app, hoặc dùng `--provider edge` |
+| `无法连接 CIT Voice Studio` | Chưa mở CIT Voice Studio hoặc sai `CIT_BASE_URL` → mở ứng dụng, hoặc dùng `--provider edge` |
 | `CIT 当前模型没有声音 ...` | Tên giọng sai hoặc không thuộc mô hình đang chạy → xem `http://127.0.0.1:8001/voices` |
 | `CIT 模型未就绪` | Mô hình đang tải → đợi `/health` báo `"status": "ok"` |
 | `You have exceeded the API TTS quota` | Tài khoản Vbee hết quota API → nạp thêm hoặc dùng `--provider edge` |
 | `缺少 VBEE_APP_ID / VBEE_ACCESS_TOKEN` | Chưa khai báo key Vbee trong `.env` |
 | `需要系统 ffmpeg / ffprobe` | Cài ffmpeg và thêm vào PATH |
-| Phụ đề bị đè lên nét vẽ | Dùng lệnh gắn phụ đề ở trên (có nền màu giấy sau chữ) |
+| Phụ đề đè lên nét vẽ | Dùng lệnh gắn phụ đề ở bước 6 (có nền màu giấy sau chữ) |
 | Nhân vật lộ ra trước lượt | Thêm `protectedRegions` hoặc sửa `region` cho khớp hơn |
 
-## Giấy phép
+## Cộng đồng và các mẫu video khác
 
-MIT License — xem [LICENSE](LICENSE).
+### 🎬 Các repo tạo video khác
 
-Dự án gốc: [geeklee/srt-whiteboard-animation](https://github.com/geeklee/srt-whiteboard-animation) của tác giả 江哥是老登啊 (Douyin, Bilibili), phát hành theo MIT License. Bản này bổ sung giọng đọc tiếng Việt, làm video từ chủ đề/kịch bản, chế độ nhịp gọn và tài liệu tiếng Việt.
+| Repo | Dùng để |
+|---|---|
+| [remotion-cuongit-template](https://github.com/Cuongyd196/remotion-cuongit-template) | Tạo video chia sẻ kiến thức |
+| [auto-video-gen](https://github.com/Cuongyd196/auto-video-gen) | Tạo video từ một đường link / bài viết |
+| [auto-compare-video](https://github.com/Cuongyd196/auto-compare-video) | Tạo video so sánh kiến thức |
+
+### 🤝 Tham gia cộng đồng
+
+Mình tạo nhóm này để các bạn trao đổi về làm video với AI. Với các repo mình công khai, có vướng mắc gì mình sẽ giải đáp.
+
+<p>
+  <a href="https://www.facebook.com/groups/1010029065373486"><img src="https://img.shields.io/badge/Nh%C3%B3m%20Facebook-tham%20gia-1877F2?logo=facebook&logoColor=white" alt="Nhóm Facebook"></a>
+  &nbsp;
+  <a href="https://zalo.me/g/8bfeotyh5ewtkzxmp5gt"><img src="https://img.shields.io/badge/Nh%C3%B3m%20Zalo-tham%20gia-0068FF?logo=zalo&logoColor=white" alt="Nhóm Zalo"></a>
+</p>
+
+⭐ Nếu thấy hữu ích, cho mình một **star** trên GitHub nhé!
+
+## Ghi công và giấy phép
+
+Phát hành theo [MIT License](LICENSE).
+
+Dự án gốc: [geeklee/srt-whiteboard-animation](https://github.com/geeklee/srt-whiteboard-animation) của tác giả 江哥是老登啊 (Douyin, Bilibili), MIT License. Giọng đọc mặc định: [CIT Voice Studio](https://github.com/Cuongyd196/cit-voice-studio).
