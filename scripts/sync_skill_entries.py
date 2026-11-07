@@ -9,7 +9,7 @@ Chỉ cần sửa SKILL.md gốc (cả frontmatter name/description lẫn quy tr
 File lối vào được sinh:
   .claude/skills/<name>/SKILL.md   Claude Code
   .agents/skills/<name>/SKILL.md   Codex (kèm agents/openai.yaml chép từ agents/openai.yaml gốc)
-  .agents/skills/<name>/SKILL.md    Google Antigravity
+  .agent/skills/<name>/SKILL.md    Google Antigravity
 AGENTS.md / GEMINI.md viết tay, không cần đồng bộ.
 """
 from __future__ import annotations
